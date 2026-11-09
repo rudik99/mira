@@ -4,6 +4,15 @@ All notable changes to Mira are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project
 follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+
+- **Reusable dashboard read helpers.** `mira.dashboard.queries` builds the dashboard's repo list, activity feed, per-repo review list and aggregate stats from an explicit list of repositories, so another process can serve the same response models over a subset of the registry. The `/api/activity`, `/api/stats` and `/api/repos` routes now call these helpers and behave exactly as before.
+
+### Changed
+
+- The GitHub webhook dispatcher accepts any scheduler exposing `add_task` (the `TaskScheduler` protocol) instead of requiring FastAPI's `BackgroundTasks`, and the HMAC check is exported as `verify_signature` so other entry points can validate deliveries the same way. `_verify_signature` remains as an alias.
+
 ## [0.11.1] — 2026-11-09
 ### Added
 
